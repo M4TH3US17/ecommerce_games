@@ -1,21 +1,34 @@
 package com.example.demo.resources;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entities.Address;
 import com.example.demo.entities.Client;
+import com.example.demo.repositories.ClientRepository;
 
 @RestController
 @RequestMapping(value = "/client")
 public class ClientResource {
 
+	@Autowired
+	private ClientRepository repository;
+	
 	@GetMapping
-	public ResponseEntity<Client> findAll(){
-		Client obj = new Client(null, "Matheus Dalvino", "(92) 00000-0000", 
-				new Address(null, "av. samaúma", 517));
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<List<Client>> findAll(){
+		List<Client> list = repository.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Client> findById(@PathVariable Long id){
+		Optional<Client> obj = repository.findById(id);
+		return ResponseEntity.ok().body(obj.get());
 	}
 }
