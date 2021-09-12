@@ -1,42 +1,34 @@
 package com.example.demo.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_client")
-public class Client implements Serializable {
+@Table(name = "tb_game")
+public class Game implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String contact;
+	private Double price;
+	private String description;
 	
-	@OneToOne
-	private Address address;
-	@OneToMany(mappedBy = "client")
-	private List<Order> list = new ArrayList<>();
-	
-	public Client() {
+	public Game() {
 	}
 
-	public Client(Long id, String name, String contact, Address address) {
+	public Game(Long id, String name, String description, Double price) {
 		this.id = id;
 		this.name = name;
-		this.contact = contact;
-		this.address = address;
+		this.price = price;
+		this.description = description;
 	}
 
 	public Long getId() {
@@ -55,24 +47,20 @@ public class Client implements Serializable {
 		this.name = name;
 	}
 
-	public String getContact() {
-		return contact;
+	public Double getPrice() {
+		return price;
 	}
 
-	public void setContact(String contact) {
-		this.contact = contact;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
-	public Address getAddress() {
-		return address;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public List<Order> getList() {
-		return list;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
@@ -88,7 +76,8 @@ public class Client implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Client other = (Client) obj;
+		Game other = (Game) obj;
 		return Objects.equals(id, other.id);
 	}
+	
 }
