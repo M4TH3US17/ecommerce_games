@@ -14,20 +14,20 @@ import com.example.demo.entities.Order;
 import com.example.demo.repositories.OrderRepository;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping(value = "/orders")
 public class OrderResource {
 
 	@Autowired 
 	private OrderRepository repository;
 	
-	@GetMapping
+	@GetMapping()
 	public ResponseEntity<List<Order>> findAll() {
 		List<Order> list = repository.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Order> findById(@PathVariable Long id) {
+	public ResponseEntity<Order> findById(@PathVariable(value = "id") Long id) {
 		Optional<Order> obj = repository.findById(id);
 		return ResponseEntity.ok().body(obj.get());
 	}

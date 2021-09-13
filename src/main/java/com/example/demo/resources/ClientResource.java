@@ -14,13 +14,13 @@ import com.example.demo.entities.Client;
 import com.example.demo.repositories.ClientRepository;
 
 @RestController
-@RequestMapping(value = "/client")
+@RequestMapping("/clients")
 public class ClientResource {
 
 	@Autowired
 	private ClientRepository repository;
 	
-	@GetMapping
+	@GetMapping()
 	public ResponseEntity<List<Client>> findAll(){
 		List<Client> list = repository.findAll();
 		return ResponseEntity.ok().body(list);

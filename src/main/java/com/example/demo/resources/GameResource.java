@@ -14,7 +14,7 @@ import com.example.demo.entities.Game;
 import com.example.demo.repositories.GameRepository;
 
 @RestController
-@RequestMapping("/game")
+@RequestMapping("/games")
 public class GameResource {
 	
 	@Autowired

@@ -90,7 +90,7 @@ public class Order implements Serializable {
 	public void setSubtotal(Double subtotal) {
 		this.subtotal = subtotal;
 	}
-
+	
 	public Client getClient() {
 		return client;
 	}

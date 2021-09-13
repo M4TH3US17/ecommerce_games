@@ -13,7 +13,7 @@ import com.example.demo.entities.Address;
 import com.example.demo.services.AddressService;
 
 @RestController
-@RequestMapping("/address")
+@RequestMapping(value = "/adresses")
 public class AddressResource {
 	
 	@Autowired
