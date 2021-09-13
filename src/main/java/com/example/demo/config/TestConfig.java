@@ -43,6 +43,7 @@ public class TestConfig implements CommandLineRunner {
 		addressRepository.save(objA);
 		clientRepository.save(obj);
 		orderRepository.save(order);
+		
 	}
 	
 	
