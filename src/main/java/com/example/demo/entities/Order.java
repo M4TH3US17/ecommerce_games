@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
@@ -25,6 +27,7 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Double total;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
 	private Double freight;
 	private Double subtotal;
@@ -35,8 +38,8 @@ public class Order implements Serializable {
 
 	@OneToMany
 	@JoinTable(name = "order_game", 
-	  joinColumns = @JoinColumn(name = "order_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "game_id"))
+	  joinColumns = {@JoinColumn(name = "order_id")}, 
+	  inverseJoinColumns = {@JoinColumn(name = "game_id")})
 	List<Game> games = new ArrayList<>();
 
 	public Order() {
@@ -103,8 +106,8 @@ public class Order implements Serializable {
 		return games;
 	}
 
-	public void setGames(List<Game> games) {
-		this.games = games;
+	public void gameAdd(Game game) {
+		games.add(game);
 	}
 
 	@Override

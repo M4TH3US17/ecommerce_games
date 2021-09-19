@@ -20,7 +20,7 @@ public class ClientResource {
 	@Autowired
 	private ClientRepository repository;
 	
-	@GetMapping()
+	@GetMapping
 	public ResponseEntity<List<Client>> findAll(){
 		List<Client> list = repository.findAll();
 		return ResponseEntity.ok().body(list);

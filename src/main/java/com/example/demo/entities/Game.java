@@ -54,7 +54,7 @@ public class Game implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-
+	
 	public String getDescription() {
 		return description;
 	}
