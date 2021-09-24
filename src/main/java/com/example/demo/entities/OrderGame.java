@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.example.demo.entities.pk.OrderGamePK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_order_game")
@@ -15,7 +16,7 @@ public class OrderGame implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private OrderGamePK id;
+	private OrderGamePK id = new OrderGamePK();
 	private Integer quantity;
 	private Double price;
 	
@@ -37,6 +38,7 @@ public class OrderGame implements Serializable {
 		id.setGame(game);
 	}
 	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}

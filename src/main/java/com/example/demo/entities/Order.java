@@ -2,16 +2,15 @@ package com.example.demo.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -36,14 +35,11 @@ public class Order implements Serializable {
 	@JoinColumn(name = "client_id")
 	private Client client;
 
-	@OneToMany
-	@JoinTable(name = "order_game", 
-	  joinColumns = {@JoinColumn(name = "order_id")}, 
-	  inverseJoinColumns = {@JoinColumn(name = "game_id")})
-	List<Game> games = new ArrayList<>();
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderGame> items = new HashSet<>();
 
 	public Order() {
-	}
+	}	
 
 	public Order(Long id, Double total, Instant moment, Double freight, Double subtotal, Client client) {
 		this.id = id;
@@ -102,12 +98,8 @@ public class Order implements Serializable {
 		this.client = client;
 	}
 
-	public List<Game> getGames() {
-		return games;
-	}
-
-	public void gameAdd(Game game) {
-		games.add(game);
+	public Set<OrderGame> getGames() {
+		return items;
 	}
 
 	@Override
