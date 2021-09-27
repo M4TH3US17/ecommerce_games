@@ -1,13 +1,18 @@
 package com.example.demo.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_game")
@@ -20,6 +25,9 @@ public class Game implements Serializable {
 	private String name;
 	private Double price;
 	private String description;
+	
+	@OneToMany(mappedBy = "id.game")
+	private Set<OrderGame> items = new HashSet<>();
 	
 	public Game() {
 	}
@@ -62,7 +70,16 @@ public class Game implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
+	@JsonIgnore
+	public Set<Order> getOrders(){
+	Set<Order> set = new HashSet<>();	
+	for(OrderGame og: items) {
+			set.add(og.getOrder());
+	}	
+	return set;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

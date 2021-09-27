@@ -53,6 +53,7 @@ public class TestConfig implements CommandLineRunner {
 		OrderGame og2 = new OrderGame(o1,g3, 1, g3.getPrice());
 		OrderGame og3 = new OrderGame(o2, g1, 1, g1.getPrice());
 		OrderGame og4 = new OrderGame(o2, g2, 2, g2.getPrice());
+		
 		orderGameRepository.saveAll(Arrays.asList(og1, og2, og3, og4));
 		orderRepository.saveAll(Arrays.asList(o1, o2));
 		

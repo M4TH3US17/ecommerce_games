@@ -27,7 +27,7 @@ public class OrderResource {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Order> findById(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<Order> findById(@PathVariable Long id) {
 		Optional<Order> obj = repository.findById(id);
 		return ResponseEntity.ok().body(obj.get());
 	}
