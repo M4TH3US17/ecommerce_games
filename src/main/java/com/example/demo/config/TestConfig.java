@@ -13,6 +13,7 @@ import com.example.demo.entities.Client;
 import com.example.demo.entities.Game;
 import com.example.demo.entities.Order;
 import com.example.demo.entities.OrderGame;
+import com.example.demo.entities.Payment;
 import com.example.demo.repositories.AddressRepository;
 import com.example.demo.repositories.ClientRepository;
 import com.example.demo.repositories.GameRepository;
@@ -57,6 +58,10 @@ public class TestConfig implements CommandLineRunner {
 		orderGameRepository.saveAll(Arrays.asList(og1, og2, og3, og4));
 		orderRepository.saveAll(Arrays.asList(o1, o2));
 		
+		Payment pay1 = new Payment(null, Instant.parse("2021-09-13T19:00:12Z"), o1);
+		o1.setPayment(pay1);
+		
+		orderRepository.save(o1);
 	}
 	
 	
