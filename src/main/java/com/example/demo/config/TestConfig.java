@@ -46,8 +46,8 @@ public class TestConfig implements CommandLineRunner {
 		Game g3 = new Game(null, "Minimundos", "Crie um mundo virtual com seus amigos", 10.00);
 		gameRepository.saveAll(Arrays.asList(g1, g2, g3));
 		
-		Order o1 = new Order(null, 30.00, Instant.parse("2021-09-13T17:55:32Z"), 50.00, 30.00, obj);
-		Order o2 = new Order(null, 30.00, Instant.parse("2021-09-13T17:55:32Z"), 50.00, 30.00, obj);
+		Order o1 = new Order(null, 30.00, Instant.parse("2021-09-13T17:55:32Z"), 30.00, obj);
+		Order o2 = new Order(null, 30.00, Instant.parse("2021-09-13T17:55:32Z"), 30.00, obj);
 		orderRepository.saveAll(Arrays.asList(o1, o2));
 		
 		OrderGame og1 = new OrderGame(o1, g1, 2, g1.getPrice());

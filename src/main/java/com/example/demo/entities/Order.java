@@ -27,11 +27,9 @@ public class Order implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Double total;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
 	private Double freight;
-	private Double subtotal;
 
 	@ManyToOne
 	@JoinColumn(name = "client_id")
@@ -46,12 +44,10 @@ public class Order implements Serializable {
 	public Order() {
 	}	
 
-	public Order(Long id, Double total, Instant moment, Double freight, Double subtotal, Client client) {
+	public Order(Long id, Double total, Instant moment, Double freight, Client client) {
 		this.id = id;
-		this.total = total;
 		this.moment = moment;
 		this.freight = freight;
-		this.subtotal = subtotal;
 		this.client = client;
 	}
 
@@ -61,14 +57,6 @@ public class Order implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
 	}
 
 	public Instant getMoment() {
@@ -85,14 +73,6 @@ public class Order implements Serializable {
 
 	public void setFreight(Double freight) {
 		this.freight = freight;
-	}
-
-	public Double getSubtotal() {
-		return subtotal;
-	}
-
-	public void setSubtotal(Double subtotal) {
-		this.subtotal = subtotal;
 	}
 	
 	public Client getClient() {
@@ -115,6 +95,18 @@ public class Order implements Serializable {
 		return items;
 	}
 
+	public Double getTotal() {
+		double sum = 0.0;
+		for(OrderGame x: items) {
+			sum += (x.getPrice() * x.getQuantity());
+		}
+		return sum + freight;
+	}
+	
+	public Double getSubTotal() {
+		return getTotal() - freight;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
