@@ -46,8 +46,8 @@ public class Order implements Serializable {
 
 	public Order(Long id, Double total, Instant moment, Double freight, Client client) {
 		this.id = id;
-		this.moment = moment;
 		this.freight = freight;
+		this.moment = moment;
 		this.client = client;
 	}
 
@@ -97,16 +97,17 @@ public class Order implements Serializable {
 
 	public Double getTotal() {
 		double sum = 0.0;
+		
 		for(OrderGame x: items) {
 			sum += (x.getPrice() * x.getQuantity());
 		}
-		return sum + freight;
+		return sum + getFreight();
 	}
 	
 	public Double getSubTotal() {
-		return getTotal() - freight;
+		return getTotal() - getFreight();
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

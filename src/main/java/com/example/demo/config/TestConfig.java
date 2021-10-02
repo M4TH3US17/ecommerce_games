@@ -38,7 +38,7 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Address objA = new Address(null, "Av. samúma", 517);
 		Client obj = new Client(null,"Matheus Dalvino", "(92) 00000-0000", objA);
-		addressRepository.save(objA);
+		//addressRepository.save(objA);
 		clientRepository.save(obj);
 		
 		Game g1 = new Game(null, "God of War", "Deus da Guerra, o jogo para mobile", 20.00);
@@ -46,8 +46,8 @@ public class TestConfig implements CommandLineRunner {
 		Game g3 = new Game(null, "Minimundos", "Crie um mundo virtual com seus amigos", 10.00);
 		gameRepository.saveAll(Arrays.asList(g1, g2, g3));
 		
-		Order o1 = new Order(null, 30.00, Instant.parse("2021-09-13T17:55:32Z"), 30.00, obj);
-		Order o2 = new Order(null, 30.00, Instant.parse("2021-09-13T17:55:32Z"), 30.00, obj);
+		Order o1 = new Order(null, 30.00, Instant.parse("2021-09-13T17:55:32Z"), 30.0, obj);
+		Order o2 = new Order(null, 30.00, Instant.parse("2021-09-13T17:55:32Z"), 30.0, obj);
 		orderRepository.saveAll(Arrays.asList(o1, o2));
 		
 		OrderGame og1 = new OrderGame(o1, g1, 2, g1.getPrice());
@@ -55,8 +55,8 @@ public class TestConfig implements CommandLineRunner {
 		OrderGame og3 = new OrderGame(o2, g1, 1, g1.getPrice());
 		OrderGame og4 = new OrderGame(o2, g2, 2, g2.getPrice());
 		
-		orderGameRepository.saveAll(Arrays.asList(og1, og2, og3, og4));
 		orderRepository.saveAll(Arrays.asList(o1, o2));
+		orderGameRepository.saveAll(Arrays.asList(og1, og2, og3, og4));
 		
 		Payment pay1 = new Payment(null, Instant.parse("2021-09-13T19:00:12Z"), o1);
 		o1.setPayment(pay1);
