@@ -28,7 +28,7 @@ public class Client implements Serializable {
 	private String name;
 	private String contact;
 	
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")

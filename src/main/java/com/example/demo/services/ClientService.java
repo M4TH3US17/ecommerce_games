@@ -31,4 +31,19 @@ public class ClientService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+	
+	public Client update(Long id, Client obj) {
+		Client entity = repository.getById(id);
+		updateData(entity, obj);
+		return repository.save(entity);
+	}
+
+	private void updateData(Client entity, Client obj) {
+		entity.setName(obj.getName());
+		entity.setContact(obj.getContact());
+		entity.getAddress().setStreet(obj.getAddress().getStreet());
+		entity.getAddress().setNumberHouse(obj.getAddress().getNumberHouse());
+		//entity.setAddress(obj.getAddress());
+	}
+	
 }
